@@ -1,19 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Form from './Components/Form';
+import Form from './Containers/Form';
 import TodoList from './Components/TodoList';
 import TodoListStore from './store/context';
 
 
 interface Todo_ {
-  text: string; 
-  completed: boolean; 
+  text: string;
+  completed: boolean;
   id: number
 }
 
- enum status {
-   'all', 'completed', 'uncompleted'
- }
+enum status {
+  'all', 'completed', 'uncompleted'
+}
 interface allState {
   completed: Todo_[];
   all: Todo_[];
@@ -24,11 +24,11 @@ export interface AppProps {
 
 }
 
-let setupState: any = {completed: [], all: [], uncompleted: [], status: status.all};
+let setupState: any = { completed: [], all: [], uncompleted: [], status: status.all };
 
 
 //if localStorage is Empty
-if(Object.keys(JSON.parse(localStorage.getItem('todos')!)).length > 0) {
+if (Object.keys(JSON.parse(localStorage.getItem('todos')!)).length > 0) {
 
   setupState = JSON.parse(localStorage.getItem('todos')!);
   localStorage.removeItem('todos');
@@ -38,6 +38,7 @@ const App: React.FC<AppProps> = () => {
   const [State, setState] = useState<allState>(setupState);
 
   useEffect(() => {
+    //Update localStorage when State CHANGES
     localStorage.setItem('todos', JSON.stringify(State));
   }, [State]);
 
@@ -47,13 +48,13 @@ const App: React.FC<AppProps> = () => {
         <header>
           Hector Simple Todo List Ts
         </header>
-        <Form/>
-        <TodoList/>
+        <Form />
+        <TodoList />
       </div>
     </TodoListStore.Provider>
 
-      );
+  );
 }
- 
+
 export default App;
 

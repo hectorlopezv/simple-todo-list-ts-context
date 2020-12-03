@@ -1,11 +1,10 @@
 //we use context API
 import React from 'react';
 
-
 const store: any[] = [];
 
 //if localStorage is Empty
-if(localStorage.getItem('todos') === null){
+if (localStorage.getItem('todos') === null) {
     localStorage.setItem('todos', JSON.stringify({}))
 }
 
